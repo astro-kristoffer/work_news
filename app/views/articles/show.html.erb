@@ -1,0 +1,19 @@
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+
+<h3>Комментарии</h3>
+<%= render @article.comments %>
+
+<h3>Добавить комментарий</h3>
+<%= render 'comments/form' %>
+
+<%= link_to 'Редактировать', edit_article_path(@article) %>
+<%= link_to 'Назад', articles_path %>
+

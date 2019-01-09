@@ -1,0 +1,8 @@
+<h1>Новости астрономии и комонавтики</h1>
+<%= link_to 'Все новости астрономии', controller: 'articles' %>
+<% if admin_signed_in? %>
+    <span>Здравствуйте, <%= current_admin.email %></span>
+    <%= link_to 'Выйти', destroy_admin_session_path, :method => :delete %>
+<% else %>
+    <%= link_to 'Войти', new_admin_session_path %> или <%= link_to 'Зарегистрироваться', new_admin_registration_path %>
+<% end %>
