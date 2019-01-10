@@ -1,19 +1,12 @@
-<p>
-  <strong>Заголовок</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Текст</strong>
-  <%= @article.text %>
-</p>
-
+<h1><%= @article.title %></h1>
+<img src="/assets/art1.jpg" align="left" height="250" >
+<article>
+    <%= @article.text %>
+</article>
 <h3>Комментарии</h3>
 <%= render @article.comments %>
-
 <h3>Добавить комментарий</h3>
 <%= render 'comments/form' %>
 
 <%= link_to 'Редактировать', edit_article_path(@article) %>
 <%= link_to 'Назад', articles_path %>
-

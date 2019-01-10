@@ -61,6 +61,13 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Auth by Devise
 gem 'devise'
-gem 'ruby_dep'
-gem 'i18n'
+
+# MongoDB 
+# gem 'mongoid'
+
+# ElasticSearch for rails-app
+# gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: 'master'
+# gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: 'master'
+
