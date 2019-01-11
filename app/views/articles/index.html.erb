@@ -1,5 +1,12 @@
-<h1>Все новости</h1>
+<h1>Новости астрономии</h1>
 
+<div class="search">
+  <%= form_with model: @article, local: true do |f| %>
+    <%= label_tag(:q, "Найти статью:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Поиск") %>
+  <% end %>
+</div>
 <%= link_to 'Добавить статью', new_article_path %>
 <table>
   <thead>

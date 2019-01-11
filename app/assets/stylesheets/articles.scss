@@ -3,12 +3,22 @@ $primary-color: #000;
 h1 {
   font: bold 180% $font-stack;
   color: $primary-color;
-  text-align: center;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 article {
   font: 110% $font-stack;
   color: $primary-color;
-  margin-left: 20%;
+  text-align: justify;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 1%;
+}
+
+td {
+  padding-top: 1%;
+}
+
+div.search {
+  margin-left: 30%;
 }

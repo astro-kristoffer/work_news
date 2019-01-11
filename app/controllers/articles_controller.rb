@@ -18,7 +18,8 @@ before_action :authenticate_admin!, except: [:index, :show]
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.create!(article_params)
+    @article.images.attach(params[:article][:images])
 
     if @article.save
       redirect_to @article
@@ -36,7 +37,7 @@ before_action :authenticate_admin!, except: [:index, :show]
       render 'edit'
     end
   end
-
+  
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
@@ -44,8 +45,9 @@ before_action :authenticate_admin!, except: [:index, :show]
     redirect_to articles_path
   end
 
+
   private  
     def article_params
-      params.require(:article).permit(:title, :text)
+      params.require(:article).permit(:title, :text, :images)
     end
 end
