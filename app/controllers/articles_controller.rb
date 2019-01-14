@@ -7,6 +7,7 @@ before_action :authenticate_admin!, except: [:index, :show]
 
   def show
     @article = Article.find(params[:id])
+
   end
 
   def new
@@ -19,11 +20,14 @@ before_action :authenticate_admin!, except: [:index, :show]
 
   def create
     @article = Article.create!(article_params)
-
-    if @article.save
-      redirect_to @article
-    else
-      render 'new'
+    respond_to do |format|
+      if @article.save!
+        format.html {redirect_to@article}
+        format.json{ render json: @article, notice: 'Статья добавлена' }
+      else
+        format.htmn { render action:'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -47,6 +51,6 @@ before_action :authenticate_admin!, except: [:index, :show]
 
   private  
     def article_params
-      params.require(:article).permit(:title, :text, images: [])
+      params.require(:article).permit(:title, :text)
     end
 end
