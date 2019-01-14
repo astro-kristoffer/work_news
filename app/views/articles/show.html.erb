@@ -1,16 +1,8 @@
 <h1><%= @article.title %></h1>
 
 <article>
-  <% @article.images.each do |image| %>
-    <%= image_tag image %> <br />
-  <% end %>
-
   <%= @article.text %>
 </article>
-<h3>Комментарии</h3>
-<%= render @article.comments %>
-<h3>Добавить комментарий</h3>
-<%= render 'comments/form' %>
 
 <%= link_to 'Редактировать', edit_article_path(@article) %>
 <%= link_to 'Назад', articles_path %>

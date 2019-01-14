@@ -18,7 +18,6 @@
     <%= f.label :Заголовок %><br>
     <%= f.text_field :title %>
   </p>
-
   <p>
     <%= f.label :Изображение %><br>
     <%= f.file_field :images, multiply: true %>
@@ -27,6 +26,7 @@
     <%= f.label :Текст %><br>
     <%= f.text_area :text, size: "200x20" %>
   </p>
+
 
   <p>
     <%= f.submit 'Создать' %>

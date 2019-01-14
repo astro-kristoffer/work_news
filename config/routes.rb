@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'admin', to: 'admin#index'
   devise_for :admins
+  
   resources :articles do
-    resources :comments
+    resources :images
   end
-  root 'home#index'
+  root 'articles#index'
 end
