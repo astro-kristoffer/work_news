@@ -65,7 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 # MongoDB 
-# gem 'mongoid'
+gem 'mongoid'
 
 # ElasticSearch for rails-app
 # gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: 'master'

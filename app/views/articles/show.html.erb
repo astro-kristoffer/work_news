@@ -1,7 +1,9 @@
 <h1><%= @article.title %></h1>
-<img src="/assets/art1.jpg" align="left" height="250" >
 <article>
-    <%= @article.text %>
+  <% @article.images.each do |image| %>
+    <%= image_tag image %> <br />
+  <% end %>
+  <%= @article.text %>
 </article>
 <h3>Комментарии</h3>
 <%= render @article.comments %>
