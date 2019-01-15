@@ -1,0 +1,17 @@
+<h1>Поиск</h1>
+<div class="search">
+  <%= form_for search_path, method: :get do |f| %>
+    <%= f.label "Найти статью:" %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Поиск" %>
+  <% end %>
+</div>
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <h3>
+        <%= link_to article.title, controller: "articles", action: "show", id: article._id%>
+      </h3>
+    </li>
+  <% end %>
+</ul>

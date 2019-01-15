@@ -67,8 +67,9 @@ gem 'devise'
 # MongoDB 
 gem 'mongoid'
 gem 'mongoid-paperclip',:require => "mongoid_paperclip"
-gem "aws-s3", :require => "aws/s3"
-# ElasticSearch for rails-app
-# gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: 'master'
-# gem 'elasticsearch-rails', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: 'master'
 
+
+# ElasticSearch for rails-app
+gem 'elasticsearch'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'

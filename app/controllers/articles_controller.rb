@@ -20,14 +20,11 @@ before_action :authenticate_admin!, except: [:index, :show]
 
   def create
     @article = Article.create!(article_params)
-    respond_to do |format|
-      if @article.save!
-        format.html {redirect_to@article}
-        format.json{ render json: @article, notice: 'Статья добавлена' }
-      else
-        format.htmn { render action:'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    
+    if @article.save!
+      redirect_to @article
+    else
+      render 'new'
     end
   end
 
