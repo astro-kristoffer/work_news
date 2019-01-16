@@ -1,12 +1,10 @@
 class Image
   include Mongoid::Document
   include Mongoid::Paperclip
+  
+  belongs_to :article
 
-  embedded_in :article 
-  has_mongoid_attached_file :image,
-      :path => ":rails_root/public/system/:attachment/:id/:style.:extension",
-      :url => "/system/:attachment/:id/:style",
-      :styles => { :small => "200x200>", :medium => "500x500>" }
-  validates_attachment_content_type :image, :content_type => %w(image/jpeg image/jpg image/png)
+  has_mongoid_attached_file :file
+  validates_attachment_content_type :file, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 end

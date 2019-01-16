@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-before_action :authenticate_admin!, except: [:index, :show] 
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_admin!, except: [:index, :show] 
 
   def index
     @articles = Article.all
@@ -19,9 +20,9 @@ before_action :authenticate_admin!, except: [:index, :show]
   end
 
   def create
-    @article = Article.create!(article_params)
+    @article = Article.new(article_params)
     
-    if @article.save!
+    if @article.save
       redirect_to @article
     else
       render 'new'
@@ -31,6 +32,7 @@ before_action :authenticate_admin!, except: [:index, :show]
   def update
     @article = Article.find(params[:id])
 
+ 
     if @article.update(article_params)
       redirect_to @article
     else

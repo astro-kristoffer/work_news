@@ -1,10 +1,6 @@
-<h1>Редактировать новость</h1>
-
-<%= render 'form' %>
 <%= form_with model: [@article, @article.images.build], local: true do |f| %>
   <p>
     <%= f.file_field :file %>
     <%= f.submit 'Прикрепить изображение' %>
   </p>
 <% end %>
-<%= link_to 'Назад', articles_path %>

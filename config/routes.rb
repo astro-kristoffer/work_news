@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  
+  # get 'search', to: 'search#search'
   get 'admin', to: 'admin#index'
-  get 'search', to: 'search#search'
   devise_for :admins
   
   resources :articles do

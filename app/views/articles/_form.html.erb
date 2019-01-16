@@ -18,18 +18,13 @@
     <%= f.label :Заголовок %><br>
     <%= f.text_field :title %>
   </p>
-  <p>
-    <%= f.label :Изображение %><br>
-    <%= f.file_field :image %>
-  </p>
-  <p>
     <%= f.label :Текст %><br>
-    <%= f.text_area :text, size: "200x20" %>
+    <%= f.text_area :text, size: "200x20" %><br>
+    <%= f.submit "Сохранить статью" %>
   </p>
-
-
   <p>
-    <%= f.submit 'Создать' %>
-  </p>
+    <%= render @article.images %>
+  <p>
+
 
 <% end %>

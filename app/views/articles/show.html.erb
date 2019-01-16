@@ -1,7 +1,7 @@
 <h1><%= @article.title %></h1>
 
 <article>
-  <%= image_tag @article.image.url %> <br/>
+  <%= render @article.images %>
   <%= @article.text %>
 </article>
 
