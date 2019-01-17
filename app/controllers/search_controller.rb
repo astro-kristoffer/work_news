@@ -1,5 +1,9 @@
 class SearchController < ApplicationController
   def search
-    @articles = params[:q].nil? ? [] : Article.search(params[:q])
+    if params[:q].present?
+      @article = []
+    else
+      @article = Article.search params[:q]
+    end
   end
 end

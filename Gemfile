@@ -70,6 +70,6 @@ gem 'mongoid-paperclip',:require => "mongoid_paperclip"
 
 
 # ElasticSearch for rails-app
-gem 'elasticsearch'
+#gem 'elasticsearch'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'

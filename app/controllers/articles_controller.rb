@@ -8,11 +8,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-
   end
 
   def new
     @article = Article.new
+ 
   end
   
   def edit
@@ -22,21 +22,28 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     
-    if @article.save
-      redirect_to @article
-    else
-      render 'new'
+    respond_to do |format|
+      if @article.save
+        format.html { redirect_to @article, notice: 'Cтатья сохранена.' }
+        format.json { render :show, status: :created, location: @article }
+      else
+        format.html { render :new }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
     @article = Article.find(params[:id])
 
- 
-    if @article.update(article_params)
-      redirect_to @article
-    else
-      render 'edit'
+    respond_to do |format|
+      if @article.update(article_params)
+        format.html { redirect_to @article, notice: 'Статья обновлена.' }
+        format.json { render :show, status: :ok, location: @article } 
+      else
+        format.html { render :edit }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
     end
   end
   
@@ -46,7 +53,6 @@ class ArticlesController < ApplicationController
     
     redirect_to articles_path
   end
-
 
   private  
     def article_params

@@ -2,17 +2,16 @@ class ImagesController < ApplicationController
 
   before_action :authenticate_admin!
 
-  def new
-    @article = Article.new
-    @image = @article.images.create(images_params)
-    if @image.save
-      redirect_to article_path(@article)
-    end
-  end
-
   def create
+
     @article = Article.find(params[:article_id])
+
     @image = @article.images.create(images_params)
+
+    puts "\n\n\n\n!!!!!!!!!!!!\n\n\n\n"
+    p @image
+    p @image.errors
+    puts "\n\n\n\n!!!!!!!!!!!!\n\n\n\n"
     redirect_to article_path(@article)
   end
 

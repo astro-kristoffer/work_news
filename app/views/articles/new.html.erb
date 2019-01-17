@@ -1,10 +1,9 @@
 <h1>Новая статья</h1>
-
-<%= render 'form' %>
-<%= form_with model: [@article, @article.images], local: true do |f| %>
-  <p>
-    <%= f.file_field :file %>
-    <%= f.submit 'Прикрепить изображение' %>
-  </p>
+<%= form_with model: @image, local: true do |i| %>
+  <%= i.hidden_field :article_id, :value => @article.id %>
+  <%= i.file_field :file %>
+  <%= i.submit 'Add img' %>
 <% end %>
+<%= render 'form' %>
+
 <%= link_to 'Назад', articles_path %>
