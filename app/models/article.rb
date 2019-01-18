@@ -7,9 +7,10 @@ class Article
   field :text, type: String
 
   has_many :images, dependent: :destroy
+  #accepts_nested_attributes_for :images
 
-  def as_indexed_json
-    as_json(exept: [:id, :_id])
+  def as_indexed_json(options={})
+    as_json(only: [:title, :text])
   end
 
   settings index: { number_of_shards: 1 } do

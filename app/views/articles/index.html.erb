@@ -2,7 +2,11 @@
 
 <%= link_to 'Добавить статью', new_article_path %>
 <p>
-  Нажмите <%= link_to 'здесь', search_path %> , чтобы найти новость
+  <%= form_with url: search_path, method: 'get', local: true do |f| %>
+    <%= label_tag(:q, "Найти статью:") %>
+    <%= text_field_tag(params[:q]) %>
+    <%= submit_tag("Поиск") %>
+<% end %>
 </p>
 <table>
   <thead>
