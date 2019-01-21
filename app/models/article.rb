@@ -7,7 +7,7 @@ class Article
   field :text, type: String
 
   has_many :images, dependent: :destroy
-  # accepts_nested_attributes_for :images
+  accepts_nested_attributes_for :images
 
   def as_indexed_json(options={})
     as_json(only: [:title, :text])
@@ -17,6 +17,7 @@ class Article
     mappings dynamic: 'false' do
       indexes :title, analyzer: 'russian'
       indexes :text, analyzer: 'russian'
+
     end
   end
  

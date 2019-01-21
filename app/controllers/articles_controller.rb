@@ -8,11 +8,12 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @images = @article.images.all
   end
 
   def new
     @article = Article.new
- 
+    @image = @article.images.build
   end
   
   def edit
@@ -24,6 +25,9 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        params[:images]['file'].each do |i|
+          @image = @article.images.create!(:file => i)
+        end
         format.html { redirect_to @article, notice: 'Cтатья сохранена.' }
         format.json { render :show, status: :created, location: @article }
       else
@@ -56,6 +60,6 @@ class ArticlesController < ApplicationController
 
   private  
     def article_params
-      params.require(:article).permit(:title, :text)
+      params.require(:article).permit(:title, :text, images_attributes: [:id, :file])
     end
 end

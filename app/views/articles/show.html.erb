@@ -2,7 +2,9 @@
 <h1><%= @article.title %></h1>
 
 <article>
-  <%= render @article.images %>
+<% @images.each do |p| %>
+  <%= image_tag(p.file.url, height: '300') %>
+<% end %><br>
   <%= @article.text %>
 </article>
 
