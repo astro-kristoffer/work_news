@@ -1,9 +1,9 @@
 class SearchController < ApplicationController
   def search
     if params[:q].present?
-      @article = Article.search(params[:q])
+      @articles = Article.search(params[:q])
     else
-      @article = nil
+      @articles = nil
     end
   end
 end
