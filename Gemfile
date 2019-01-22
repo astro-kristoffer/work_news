@@ -73,3 +73,6 @@ gem 'mongoid-paperclip',:require => "mongoid_paperclip"
 #gem 'elasticsearch'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+
+# Bootstrap
+gem 'bootstrap-sass'

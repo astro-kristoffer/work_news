@@ -1,12 +1,15 @@
+<% content_for :title, @article.title %>
+<h2><%= @article.title %></h2>
 
-<h1><%= @article.title %></h1>
 
-<article>
 <% @images.each do |p| %>
-  <%= image_tag(p.file.url, height: '300') %>
-<% end %><br>
+  <%= image_tag(p.file.url, height: '250') %>
+<% end %>
+<p class="text">
   <%= @article.text %>
-</article>
+</p>
 
-<%= link_to 'Редактировать', edit_article_path(@article) %>
-<%= link_to 'Назад', articles_path %>
+<div class="bottom">
+<%= link_to 'Редактировать', edit_article_path(@article), class: "btn btn-light btn-lg" %>
+<%= link_to 'Назад', articles_path, class: "btn btn-light btn-lg" %>
+</div>

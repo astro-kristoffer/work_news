@@ -1,34 +1,27 @@
-<% content_for :title, "Поиск" %>
-<h1>Поиск</h1>
+<% content_for :title, "Результаты поиска" %>
+<h1>Результаты поиска</h1>
 <div>
   <%= form_for :q, url: search_path, method: 'get', local: true do |f| %>
     <%= label_tag(:q, "Найти статью:") %>
-    <%= text_field_tag(:q, params[:q]) %>
+    <%= text_field_tag(:q, params[:q], size: 35) %>
     <%= submit_tag("Поиск") %>
   <% end %>
 </div>
-<% if @articles.nil? %>
-  <h2>Статей по вашему запросу не найдено</h2>
+<% if @articles.empty? %>
+  <h4>Статей по вашему запросу не найдено</h4>
 <% else %>
-<h2>Результаты поиска</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Заголовок</th>
-        <th>Текст</th>
-      </tr>
-    </thead>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= article.text %></td>
-        <td><%= link_to 'Подробнее', article_path(article) %></td>
-        <td><%= link_to 'Редактировать', edit_article_path(article) %></td>
-        <td><%= link_to 'Удалить', article_path(article),
-                method: :delete,
-                data: { confirm: 'Вы уверены?' } %></td>
-      </tr>
-    <% end %>
-  </table>
+ <table class="table">
+  <% @articles.each do |article| %>
+    <tr>
+      <td><h4><%= link_to article.title, article_path(article) %></h4><br>
+        <%= article.text %><br>
+        <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
+      <td><%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%></td>
+      <td><%= link_to 'Удалить', article_path(article), class: "btn btn-light",
+              method: :delete,
+              data: { confirm: 'Вы уверены?' } %></td>
+    </tr>
+  <% end %>
+</table>
 <% end %>
-<%= link_to 'Назад', articles_path %>
+<%= link_to 'Назад', articles_path, class: "btn btn-secondary" %>
