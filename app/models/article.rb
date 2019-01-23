@@ -2,6 +2,7 @@ class Article
   include Mongoid::Document
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+  include ElasticMyAnalyzer
 
   field :title, type: String
   field :text, type: String
@@ -13,10 +14,10 @@ class Article
     as_json(only: [:title, :text])
   end
 
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :title, analyzer: 'russian'
-      indexes :text, analyzer: 'russian'
+  settings ES_SETTING do
+    mappings dynamic: 'true' do
+      indexes :title, analyzer: 'my_analyzer'
+      indexes :text, analyzer: 'my_analyzer'
 
     end
   end

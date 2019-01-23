@@ -20,7 +20,7 @@ module ElasticMyAnalyzer
           type: 'custom',
           tokenizer: 'standard',
           filter: [
-            'lowercase', 'russian_morphology', 'my_stopwords', 'mynGram'
+            'lowercase', 'russian_morphology', "english_morphology", 'my_stopwords', 'mynGram'
           ]
         }
       }

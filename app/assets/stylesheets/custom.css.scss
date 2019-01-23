@@ -1,15 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$font-stack: Helvetica, sans-serif;
 $primary-color: #000;
 
 #logo {
-  font-size: 2em;
+  font-size: 1.8em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  margin-right: 90%;
   padding-top: 9px;
   padding-bottom: 3px;
 }
@@ -17,6 +15,22 @@ $primary-color: #000;
 #logo:hover {
 color: #fff;
 text-decoration: none;
+}
+
+#info {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #2F4F4F;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 15px;
+  padding-bottom: 13px;
+}
+
+#titles {
+  color: #008B8B;
+  text-transform: uppercase;
+  /*text-decoration: none;*/
 }
 
 body {
@@ -60,7 +74,9 @@ div.img {
 }
 
 div.bottom {
-  margin-top: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  float: right;
 }
 
 p.text {
@@ -69,3 +85,39 @@ p.text {
   text-align: justify;
   text-indent: 1.5em;
 }
+
+p.text-sm {
+  font-size: 1.1em;
+  margin-top: 2%;
+  text-align: justify;
+}
+
+div.right {
+  position: absolute;
+  top: 1;
+  right: 0;
+  margin-right: 1em;
+}
+
+span.hi {
+  color: #fff;
+}
+
+span.right {
+  float: right;
+}
+
+div.right {
+  position: absolute;
+  top: 1;
+  right: 0;
+  margin-right: 1em;
+}
+
+div.left {
+  position: absolute;
+  top: 1;
+  left: 0;
+  margin-right: 1em;
+}
+

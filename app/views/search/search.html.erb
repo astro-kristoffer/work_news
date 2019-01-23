@@ -1,27 +1,40 @@
 <% content_for :title, "Результаты поиска" %>
-<h1>Результаты поиска</h1>
-<div>
-  <%= form_for :q, url: search_path, method: 'get', local: true do |f| %>
-    <%= label_tag(:q, "Найти статью:") %>
-    <%= text_field_tag(:q, params[:q], size: 35) %>
-    <%= submit_tag("Поиск") %>
-  <% end %>
-</div>
-<% if @articles.empty? %>
-  <h4>Статей по вашему запросу не найдено</h4>
+<nav class="navbar navbar-light bg-light">
+  <div class="left"> 
+    <span class="navbar-brand", id="info">Новости астрономии и космонавтики</span>
+  </div>
+  <div class="right">  
+      <%= form_for :q, url: search_path, method: 'get', local: true do |f| %>
+        <%= text_field_tag(:q, params[:q], size: 30, placeholder:"Найти статью") %>
+        <%= submit_tag("Поиск", class: "btn btn-secondary") %>
+      <% end %>
+  </div>
+</nav>
+
+<h3 class="center">Результаты поиска</h3><br>
+<% if @articles.nil? || @articles.empty? %>
+  <div class="alert alert-warning" role="alert">
+    <h4 class="center">Статей по вашему запросу не найдено</h4>
+  </div>
 <% else %>
  <table class="table">
   <% @articles.each do |article| %>
-    <tr>
-      <td><h4><%= link_to article.title, article_path(article) %></h4><br>
-        <%= article.text %><br>
-        <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
-      <td><%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%></td>
-      <td><%= link_to 'Удалить', article_path(article), class: "btn btn-light",
-              method: :delete,
-              data: { confirm: 'Вы уверены?' } %></td>
-    </tr>
+  <div class="media">
+    <div class="media-body">
+      <tr>
+        <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "titles" %></h4>
+        <p class="text-sm"><%= article.text %></p>
+          <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
+        <td><%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%></td>
+        <td><%= link_to 'Удалить', article_path(article), class: "btn btn-light",
+                method: :delete,
+                data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    </div>
+  </div>
   <% end %>
 </table>
 <% end %>
-<%= link_to 'Назад', articles_path, class: "btn btn-secondary" %>
+<div class="bottom">
+  <%= link_to 'Назад', articles_path, class: "btn btn-secondary" %>
+</div>
