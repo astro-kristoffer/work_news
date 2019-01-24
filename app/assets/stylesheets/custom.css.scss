@@ -76,7 +76,7 @@ div.img {
 div.bottom {
   margin-top: 5%;
   margin-bottom: 5%;
-  float: right;
+  float: left;
 }
 
 p.text {
@@ -121,3 +121,8 @@ div.left {
   margin-right: 1em;
 }
 
+.field_with_errors {
+  padding: 1px;
+  background-color: #DC143C;
+  display: table;
+}

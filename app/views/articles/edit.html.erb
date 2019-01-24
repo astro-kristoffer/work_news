@@ -1,13 +1,13 @@
 <% content_for :title, "Редактировать новость" %>
 <h2>Редактировать новость</h2>
 
-<%= form_with model: @article, local: true do |f| %>
+<%= form_with model: @article do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation" class="alert alert-danger" role="alert">
-      <h2>
+      <h4>
         <%= pluralize(@article.errors.count, "error") %> prohibited
         this article from being saved:
-      </h2>
+      </h4>
       <ul>
         <% @article.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -30,7 +30,7 @@
   <%= render @article.images %>
 </p>
 
-<%= form_with model: [@article, @article.images.build], local: true do |f| %>
+<%= form_with model: [@article, @article.images.build] do |f| %>
   <%= f.file_field :file%><br>
   <%= f.submit 'Прикрепить изображение', class: "btn btn-secondary" %>
 <% end %>
