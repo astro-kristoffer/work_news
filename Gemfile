@@ -61,7 +61,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Auth by Devise
+# Auth via Devise
 gem 'devise'
 
 # MongoDB 
@@ -76,3 +76,7 @@ gem 'elasticsearch-rails'
 
 # Bootstrap
 gem 'bootstrap-sass'
+
+# Rails-ujs without the dependency on JQuery-ujs
+gem 'rails-ujs'
+gem 'jquery-rails'

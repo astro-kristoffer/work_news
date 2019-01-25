@@ -10,8 +10,9 @@
       <% end %>
   </div>
 </nav>
-<span class="right"><%= link_to 'Добавить статью', new_article_path, class: "btn btn-secondary" %></span>
-
+<div id="new-article">
+  <span class="right"><%= link_to 'Добавить статью', new_article_path, remote: true, class: "btn btn-secondary" %></span>
+</div>
 <table class="table">
   <% @articles.each do |article| %>
   <div class="media">

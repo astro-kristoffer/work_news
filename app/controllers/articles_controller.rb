@@ -14,6 +14,9 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
     @image = @article.images.build
+    respond_to do |format|
+      format.js
+    end
   end
   
   def edit
