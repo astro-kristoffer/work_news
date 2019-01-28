@@ -4,7 +4,6 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
     <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,7 +14,7 @@
       <%= link_to "AstroNews", articles_path, id: "logo" %>
       <div class="right">
         <% if admin_signed_in? %>
-          <span class="hi">Здравствуйте, <%= current_admin.email %></span>
+          <span class="hi">Привет, <%= current_admin.email %></span>
           <%= link_to 'Выйти', destroy_admin_session_path, :method => :delete, class: "btn btn-light" %>
         <% else %>
           <%= link_to 'Войти', new_admin_session_path, class: "btn btn-light" %><span class="hi"> или </span><%= link_to 'Зарегистрироваться', new_admin_registration_path, class: "btn btn-light" %>

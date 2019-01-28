@@ -10,9 +10,11 @@
       <% end %>
   </div>
 </nav>
-<div id="new-article">
-  <span class="right"><%= link_to 'Добавить статью', new_article_path, remote: true, class: "btn btn-secondary" %></span>
-</div>
+<% if admin_signed_in? %>
+  <div id="new-article">
+    <span class="right"><%= link_to 'Добавить статью', new_article_path, remote: true, class: "btn btn-secondary" %></span> 
+  </div>
+<% end %>
 <table class="table">
   <% @articles.each do |article| %>
   <div class="media">
@@ -23,12 +25,14 @@
         <p class="text-sm"><%= article.text %></p>
           <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
         <td>
-          <div class="center">
-          <div class="btn-group-vertical">
-            <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
-            <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
-                method: :delete,
-                data: { confirm: 'Вы уверены?' } %>
+          <% if admin_signed_in? %>
+            <div class="center">
+            <div class="btn-group-vertical">
+              <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
+              <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
+                  method: :delete,
+                  data: { confirm: 'Вы уверены?' } %>
+          <% end %>
           </div>
         </td>
       </tr>

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :authenticate_admin!, except: [:index, :show] 
 
   def index
@@ -31,11 +31,9 @@ class ArticlesController < ApplicationController
         params[:images]['file'].each do |i|
           @image = @article.images.create!(:file => i)
         end
-        format.html { redirect_to @article, notice: 'Cтатья сохранена.' }
-        format.json { render :show, status: :created, location: @article }
+        format.html { redirect_to @article }  
       else
         format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,10 +44,8 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Статья обновлена.' }
-        format.json { render :show, status: :ok, location: @article } 
       else
         format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,6 +59,6 @@ class ArticlesController < ApplicationController
 
   private  
     def article_params
-      params.require(:article).permit(:title, :text, images_attributes: [:id, :file])
+      params.require(:article).permit(:title, :text)
     end
 end
