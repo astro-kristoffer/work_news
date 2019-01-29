@@ -1,7 +1,6 @@
 <% content_for :title, @article.title %>
 <h2><%= @article.title %></h2>
 
-
 <% @images.each do |p| %>
   <%= image_tag(p.file.url, height: '250') %>
 <% end %>

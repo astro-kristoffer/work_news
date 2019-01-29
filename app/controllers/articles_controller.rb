@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
     @image = @article.images.build
     respond_to do |format|
+      # format.html
       format.js
     end
   end
@@ -28,12 +29,16 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        params[:images]['file'].each do |i|
-          @image = @article.images.create!(:file => i)
-        end
-        format.html { redirect_to @article }  
+        begin 
+          params[:images]['file'].each do |i|
+            @image = @article.images.create!(:file => i)
+          end
+        rescue NoMethodError
+        ensure
+          format.html { redirect_to @article }
+        end  
       else
-        format.html { render :new }
+        format.js { render :new}
       end
     end
   end

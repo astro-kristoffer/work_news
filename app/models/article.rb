@@ -18,11 +18,9 @@ class Article
     mappings dynamic: 'true' do
       indexes :title, analyzer: 'my_analyzer'
       indexes :text, analyzer: 'my_analyzer'
-
     end
   end
  
   validates :title, presence: true, length: { in: 5..250 }
   validates :text, presence: true, length: { in: 5..2000 }
-
 end

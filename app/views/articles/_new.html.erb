@@ -1,38 +1,40 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="myModalLabel">Новая статья</h3>
+  <button type="button" class="close" data-dismiss="modal">Закрыть</button>
+</div>
 
-<h2>Новая статья</h2>
-<%= form_with model: @article do |f| %>
-  <% if @article.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger" role="alert">
-      <h3>
-        <%= pluralize(@article.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h3>
-      <ul>
-        <% @article.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+<div class="modal-body">
+  <%= form_with model: @article do |f| %>
+    <% if @article.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger" role="alert">
+        <h3>
+          <%= pluralize(@article.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h3>
+        <ul>
+          <% @article.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <p>
+      <%= f.label :Заголовок %><br>
+      <%= f.text_field :title, size: 50, placeholder: "Введите заголовок" %>
+    </p>
+    <p>
+      <%= f.fields_for :images do |p| %>
+       <div>
+         <%= p.label :Изображение %><br>
+         <%= p.file_field :file, :multiple => true, name: "images[file][]" %>
+       </div>
+     <% end %>
+   </p>
+   <p>
+      <%= f.label :Текст %><br>
+      <%= f.text_area :text, size: "50x20", placeholder: "Введите текст статьи" %><br>
+      <%= f.submit "Сохранить статью", class: "btn btn-secondary" %>
+    </p>
   <% end %>
-
-  <p>
-    <%= f.label :Заголовок %><br>
-    <%= f.text_field :title, size: 100, placeholder: "Введите заголовок" %>
-  </p>
-  <p>
-    <%= f.fields_for :images do |p| %>
-     <div>
-       <%= p.label :Изображение %><br>
-       <%= p.file_field :file, :multiple => true, name: "images[file][]" %>
-     </div>
-   <% end %>
- </p>
- <p>
-    <%= f.label :Текст %><br>
-    <%= f.text_area :text, size: "130x20", placeholder: "Введите текст статьи" %><br>
-    <%= f.submit "Сохранить статью", class: "btn btn-secondary" %>
-  </p>
-<% end %>
-<%= link_to 'Отмена', articles_path, class: "btn btn-secondary" %>
-
+</div>
 

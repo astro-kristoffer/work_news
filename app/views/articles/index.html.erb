@@ -1,7 +1,7 @@
 <% content_for :title, "Главная" %>
 <nav class="navbar navbar-light bg-light">
   <div class="left"> 
-    <span class="navbar-brand", id="info">Новости астрономии и космонавтики</span>
+    <span class="navbar-brand", id="info">Новости астрономии</span>
   </div>
   <div class="right">  
       <%= form_for :q, url: search_path, method: 'get', local: true do |f| %>
@@ -10,35 +10,46 @@
       <% end %>
   </div>
 </nav>
+
 <% if admin_signed_in? %>
-  <div id="new-article">
-    <span class="right"><%= link_to 'Добавить статью', new_article_path, remote: true, class: "btn btn-secondary" %></span> 
-  </div>
+  <span class="right"><%= link_to 'Добавить статью', new_article_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#new-article', class: 'btn btn-secondary'} %></span>
 <% end %>
+
+
+<div class="modal fade" id="new-article" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
 <table class="table">
   <% @articles.each do |article| %>
-  <div class="media">
-    
-    <div class="media-body">
-      <tr>
-        <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "titles" %></h4>
+  <tr>
+    <td>
+      <div class="img-thumbnail">
+        <% if article.images.first.nil? %>
+        <% else %>
+          <%= image_tag(article.images.first.file.url, width: '250') %>
+        <% end %>
+      </div>
+    </td>
+    <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "titles" %></h4>
+      <div class="t-hidden" style="height: 255px;">
         <p class="text-sm"><%= article.text %></p>
-          <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
-        <td>
-          <% if admin_signed_in? %>
-            <div class="center">
-            <div class="btn-group-vertical">
-              <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
-              <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
-                  method: :delete,
-                  data: { confirm: 'Вы уверены?' } %>
-          <% end %>
+      </div>
+      <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
+    <td>
+      <% if admin_signed_in? %>
+        <div class="center">
+          <div class="btn-group-vertical">
+            <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
+            <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
+                method: :delete,
+                data: { confirm: 'Вы уверены?' } %>
           </div>
-        </td>
-      </tr>
-    </div>
-  </div>
+        </div>
+      <% end %>
+    </td>
+  </tr>
   <% end %>
 </table>
-
-
