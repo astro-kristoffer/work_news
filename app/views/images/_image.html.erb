@@ -1,5 +1,6 @@
 <p>
   <%= image_tag(image.file.url, height: '300') %><br>
+  <%#!! remote: true %>
   <%= link_to 'Удалить изображение', [image.article, image],
                method: :delete,
                data: { confirm: 'вы уверены?' } %>

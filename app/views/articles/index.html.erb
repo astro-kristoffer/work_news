@@ -4,10 +4,13 @@
     <span class="navbar-brand", id="info">Новости астрономии</span>
   </div>
   <div class="right">  
-      <%= form_for :q, url: search_path, method: 'get', local: true do |f| %>
+    <%#!! remote: true %>
+    <div id="search-article">
+      <%= form_for :q, url: search_path, remote: true, method: 'get' do |f| %>
         <%= text_field_tag(:q, params[:q], size: 30, placeholder:"Найти статью") %>
         <%= submit_tag("Поиск", class: "btn btn-secondary") %>
       <% end %>
+    </div>
   </div>
 </nav>
 
@@ -22,7 +25,10 @@
   </div>
 </div>
 
+<%# для верстки такого списка тег table требоваться не должен %>
 <table class="table">
+  <%# ограничение количества статей на странице, желательно без полной перезагрузки страницы %>
+  <%= will_paginate @articles %>
   <% @articles.each do |article| %>
   <tr>
     <td>
@@ -33,7 +39,7 @@
         <% end %>
       </div>
     </td>
-    <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "titles" %></h4>
+    <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "article-titles" %></h4>
       <div class="t-hidden" style="height: 255px;">
         <p class="text-sm"><%= article.text %></p>
       </div>
@@ -43,6 +49,7 @@
         <div class="center">
           <div class="btn-group-vertical">
             <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
+            <%#!! remote: true #>
             <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
                 method: :delete,
                 data: { confirm: 'Вы уверены?' } %>

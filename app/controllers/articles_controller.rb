@@ -4,6 +4,15 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+    @articles = Article.paginate(:page => 1, :per_page => 2)
+  end
+  
+  def search
+    if params[:q].present?
+      @articles = Article.search(params[:q]).records.records
+    else
+      @articles = nil
+    end
   end
 
   def show
@@ -15,7 +24,6 @@ class ArticlesController < ApplicationController
     @article = Article.new
     @image = @article.images.build
     respond_to do |format|
-      # format.html
       format.js
     end
   end
@@ -29,6 +37,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        # добавить обычную проверку, что картинок нет
         begin 
           params[:images]['file'].each do |i|
             @image = @article.images.create!(:file => i)

@@ -32,6 +32,8 @@
 
 <%= form_with model: [@article, @article.images.build] do |f| %>
   <%= f.file_field :file%><br>
+  <%# либо сохранять вместе со статьей, либо сохранять сразу при выборе фалйа %>
+  <%# кнопка 'Прикрепить изображение' не должна требоваться %>
   <%= f.submit 'Прикрепить изображение', class: "btn btn-secondary" %>
 <% end %>
 

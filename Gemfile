@@ -76,4 +76,10 @@ gem 'bootstrap-sass'
 
 # Rails-ujs without the dependency on JQuery-ujs
 gem 'rails-ujs'
+
 gem 'jquery-rails'
+
+#Pagination with will_paginate
+gem 'will_paginate'
+gem 'will_paginate_mongoid'
+gem 'will_paginate-bootstrap' 
