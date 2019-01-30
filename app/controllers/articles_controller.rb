@@ -3,8 +3,12 @@ class ArticlesController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show] 
 
   def index
-    @articles = Article.all
+    #@articles = Article.all
     @articles = Article.paginate(:page => 1, :per_page => 2)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def search
