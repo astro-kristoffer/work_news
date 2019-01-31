@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show] 
 
   def index
-    #@articles = Article.all
-    @articles = Article.paginate(:page => 1, :per_page => 2)
+    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.html
       format.js
@@ -16,6 +15,9 @@ class ArticlesController < ApplicationController
       @articles = Article.search(params[:q]).records.records
     else
       @articles = nil
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -49,9 +51,10 @@ class ArticlesController < ApplicationController
         rescue NoMethodError
         ensure
           format.html { redirect_to @article }
+          # format.js
         end  
       else
-        format.js { render :new}
+        format.js { render :new }
       end
     end
   end
@@ -71,8 +74,10 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    
-    redirect_to articles_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
   end
 
   private  

@@ -28,6 +28,8 @@ text-decoration: none;
 }
 
 #article-titles {
+  font-size: 1.2em;
+  font-weight: bold;
   color: #008B8B;
   text-transform: uppercase;
   /*text-decoration: none;*/
@@ -88,7 +90,6 @@ p.text {
 
 p.text-sm {
   font-size: 1.1em;
-  margin-top: 2%;
   text-align: justify;
 }
 
@@ -124,4 +125,8 @@ div.left {
 .t-hidden {
   word-wrap: break-word;
   overflow: hidden;
+}
+
+.article-inline {
+  display: inline;
 }

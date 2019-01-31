@@ -9,11 +9,11 @@
 </p>
 
 <div class="bottom">
-  <%= link_to 'Назад', articles_path, class: "btn btn-light" %>
+  <%= link_to 'Назад', root_path, class: "btn btn-light" %>
   <% if admin_signed_in? %>
     <%# возможно редактирование имеет смысл сделать интерактивным и оставить только на списке статей, просмотр оставить для просмотра %>
-    <%= link_to 'Редактировать', edit_article_path(@article), class: "btn btn-secondary" %>
-    <%= link_to 'Удалить', article_path(@article), class: "btn btn-secondary",
+    <%#= link_to 'Редактировать', edit_article_path(@article), class: "btn btn-secondary" %>
+    <%#= link_to 'Удалить', article_path(@article), class: "btn btn-secondary",
                   method: :delete,
                   data: { confirm: 'Вы уверены?' } %>
   <% end %>

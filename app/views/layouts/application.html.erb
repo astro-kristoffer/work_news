@@ -9,8 +9,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <header class="navbar navbar-expand-lg navbar-fixed-top navbar-dark" style="background-color: #008080;"> 
-      <%= link_to "AstroNews", articles_path, id: "logo" %>
+    <header class="navbar navbar-expand-lg navbar-fixed-top" style="background-color: #008080;"> 
+      <%= link_to "AstroNews", root_path, id: "logo" %>
       <div class="right">
         <% if admin_signed_in? %>
           <span class="hi">Привет, <%= current_admin.email %></span>

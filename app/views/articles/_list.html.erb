@@ -1,35 +1,30 @@
-<table class="table">
-  <%# ограничение количества статей на странице, желательно без полной перезагрузки страницы %>
-  
+<%# ограничение количества статей на странице, желательно без полной перезагрузки страницы %> 
+<div class="article-inline">
   <% @articles.each do |article| %>
-  <tr>
-    <td>
-      <div class="img-thumbnail">
-        <% if article.images.first.nil? %>
-        <% else %>
-          <%= image_tag(article.images.first.file.url, width: '250') %>
-        <% end %>
-      </div>
-    </td>
-    <td><h4 class="mt-3"><%= link_to article.title, article_path(article), id: "article-titles" %></h4>
-      <div class="t-hidden" style="height: 255px;">
-        <p class="text-sm"><%= article.text %></p>
-      </div>
-      <%= link_to 'Подробнее', article_path(article), class: "btn btn-light" %></td>
-    <td>
-      <% if admin_signed_in? %>
-        <div class="center">
-          <div class="btn-group-vertical">
-            <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
-            <%#!! remote: true #>
-            <%= link_to 'Удалить', article_path(article), class: "btn btn-light",
-                method: :delete,
-                data: { confirm: 'Вы уверены?' } %>
+  <div class="card-deck">
+    <div class="card mb-2" style="width: 10rem;">
+      <div class="card-header"><%= link_to article.title, article_path(article), id: "article-titles" %></div>
+        <div class="card-body t-hidden" style="height: 192px;">
+          <div class="card-text">
+            <% if article.images.first.nil? %>
+            <% else %>
+              <%= image_tag(article.images.first.file.url, height: '170', class: "rounded float-left mr-2") %>
+            <% end %>
+            <p class="text-sm"><%= article.text %><p>
           </div>
         </div>
+      <%= link_to 'Подробнее', article_path(article), class: "btn btn-outline-secondary" %>
+    </div>
+    <div class="btn-group-vertical">   
+      <% if admin_signed_in? %>
+        <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
+        <%#!! remote: true #%>
+        <%= link_to 'Удалить', article_path(article), remote: true, id: 'article', class: "btn btn-light",
+            method: :delete,
+            data: { confirm: 'Вы уверены?' } %>
       <% end %>
-    </td>
-  </tr>
+    </div>
+  </div>
   <% end %>
-</table>
-<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+</div>
+<%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination-sm" %>
