@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="myModalLabel">Редактировать статью</h3>
+  <button type="button" class="close" data-dismiss="modal">Закрыть</button>
+</div>
+<%= render 'form' %>
+<p>
+  <%= render @article.images %>
+</p>
+
+<%#= form_with model: [@article, @article.images.build] do |f| %>
+  <%#= f.file_field :file%><br>
+  <%# либо сохранять вместе со статьей, либо сохранять сразу при выборе фалйа %>
+  <%# кнопка 'Прикрепить изображение' не должна требоваться %>
+  <%#= f.submit 'Прикрепить изображение', class: "btn btn-secondary" %>
+<%# end %>

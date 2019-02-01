@@ -6,7 +6,7 @@
   <div class="right">  
     <%#!! remote: true %>
     <div id="search-article">
-      <%= form_for :q, url: { action: "search" }, remote: true, method: 'get' do |f| %>
+      <%= form_for :q, url: articles_search_path, remote: true, method: 'get' do |f| %>
         <%= text_field_tag(:q, params[:q], size: 30, placeholder:"Найти статью") %>
         <%= submit_tag("Поиск", class: "btn btn-secondary") %>
       <% end %>
@@ -16,13 +16,12 @@
 
 <div>
 <% if admin_signed_in? %>
-  <%= link_to 'Добавить статью', new_article_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#new-article', class: 'btn btn-secondary'} %>
+  <%= link_to 'Добавить статью', new_article_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-article', class: 'btn btn-secondary'} %>
 <% end %>
 </div><br>
 
-
-<div class="modal fade" id="new-article" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal-article" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" s>
     <div class="modal-content"></div>
   </div>
 </div>

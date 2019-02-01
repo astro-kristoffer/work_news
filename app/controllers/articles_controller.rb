@@ -1,8 +1,21 @@
 class ArticlesController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  before_action :authenticate_admin!, except: [:index, :show] 
+  before_action :authenticate_admin!, except: [:index, :show, :search] 
+
+  def search
+    if params[:q].present?
+      @articles = Article.search(params[:q]).paginate(page: params[:page], per_page: 2)
+    else
+      @articles = nil
+    end
+    respond_to do |format|
+      format.html { render articles_search_path }
+      format.js
+    end
+  end
 
   def index
+    # @articles = Article.all
     @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.html
@@ -10,17 +23,6 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def search
-    if params[:q].present?
-      @articles = Article.search(params[:q]).records.records
-    else
-      @articles = nil
-    end
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def show
     @article = Article.find(params[:id])
     @images = @article.images.all
@@ -36,6 +38,10 @@ class ArticlesController < ApplicationController
   
   def edit
     @article = Article.find(params[:id])
+    @image = @article.images.build
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -51,7 +57,7 @@ class ArticlesController < ApplicationController
         rescue NoMethodError
         ensure
           format.html { redirect_to @article }
-          # format.js
+          format.js
         end  
       else
         format.js { render :new }
@@ -61,12 +67,15 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-
+    params[:images]['file'].each do |i|
+        @image = @article.images.create!(:file => i)
+      end
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Статья обновлена.' }
-      else
-        format.html { render :edit }
+        format.html { redirect_to root_path }
+        # format.js 
+        # format.html { render :edit }
+        format.js {render :edit }
       end
     end
   end

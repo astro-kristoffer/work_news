@@ -65,6 +65,10 @@ gem 'devise'
 gem 'mongoid'
 gem 'mongoid-paperclip',:require => "mongoid_paperclip"
 
+#Pagination with will_paginate
+gem 'will_paginate'
+gem 'will_paginate_mongoid'
+gem 'will_paginate-bootstrap'
 
 # ElasticSearch for rails-app
 #gem 'elasticsearch'
@@ -79,7 +83,3 @@ gem 'rails-ujs'
 
 gem 'jquery-rails'
 
-#Pagination with will_paginate
-gem 'will_paginate'
-gem 'will_paginate_mongoid'
-gem 'will_paginate-bootstrap' 

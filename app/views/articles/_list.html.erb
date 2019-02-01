@@ -1,8 +1,8 @@
 <%# ограничение количества статей на странице, желательно без полной перезагрузки страницы %> 
-<div class="article-inline">
-  <% @articles.each do |article| %>
+<% @articles.each do |article| %>
+<ul id="<%= article.id %>">
   <div class="card-deck">
-    <div class="card mb-2" style="width: 10rem;">
+    <div class="card mb-2">
       <div class="card-header"><%= link_to article.title, article_path(article), id: "article-titles" %></div>
         <div class="card-body t-hidden" style="height: 192px;">
           <div class="card-text">
@@ -10,21 +10,22 @@
             <% else %>
               <%= image_tag(article.images.first.file.url, height: '170', class: "rounded float-left mr-2") %>
             <% end %>
-            <p class="text-sm"><%= article.text %><p>
+            <p class="text-sm"><%= article.text %></p>
           </div>
         </div>
       <%= link_to 'Подробнее', article_path(article), class: "btn btn-outline-secondary" %>
     </div>
     <div class="btn-group-vertical">   
       <% if admin_signed_in? %>
-        <%= link_to 'Редактировать', edit_article_path(article), class: "btn btn-light"%>
+        <%= link_to 'Редактировать', edit_article_path(article),{ :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#new-article', class: "btn btn-light" } %>
         <%#!! remote: true #%>
-        <%= link_to 'Удалить', article_path(article), remote: true, id: 'article', class: "btn btn-light",
+        <%= link_to 'Удалить', article_path(article), remote: true, class: "btn btn-light",
             method: :delete,
             data: { confirm: 'Вы уверены?' } %>
       <% end %>
     </div>
   </div>
-  <% end %>
-</div>
+</ul>
+<% end %>
+
 <%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination-sm" %>

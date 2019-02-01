@@ -1,0 +1,37 @@
+<div class="modal-body">
+  <%= form_with model: @article do |f| %>
+    <% if @article.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger" role="alert">
+        <h3>
+          <%= pluralize(@article.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h3>
+        <ul>
+          <% @article.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :Заголовок, class: "control-label" %><br>
+      <%= f.text_field :title, size: 50, placeholder: "Введите заголовок", class: "form-control" %>
+    </div>
+    <p>
+      <%= f.fields_for :images do |p| %>
+       <div>
+         <%= p.label :Изображение %><br>
+         <%= p.file_field :file, :multiple => true, name: "images[file][]" %>
+       </div>
+     <% end %>
+   </p>
+   <div class="form-group">
+      <%= f.label :Текст, class: "control-label" %><br>
+      <%= f.text_area :text, size: "50x20", placeholder: "Введите текст статьи", class: "form-control" %><br>
+      <%# remote: true, поискать, как сохранять файлы %>
+      <%= f.submit "Сохранить статью", class: "btn btn-secondary" %>
+      <%# возможно уместна кнопка перехода к просмотру из формы редактирования %>
+    </div>
+  <% end %>
+</div>
+

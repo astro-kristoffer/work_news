@@ -1,7 +1,7 @@
 class Image
   include Mongoid::Document
   include Mongoid::Paperclip
-  
+
   belongs_to :article
 
   has_mongoid_attached_file :file
