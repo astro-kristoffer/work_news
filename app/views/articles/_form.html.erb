@@ -1,5 +1,5 @@
 <div class="modal-body">
-  <%= form_with model: @article do |f| %>
+  <%= form_with model: @article, remote: true do |f| %>
     <% if @article.errors.any? %>
       <div id="error_explanation" class="alert alert-danger" role="alert">
         <h3>

@@ -1,1 +1,3 @@
-$("#article-list").append("ul#<%= @article.id %>")
+//$("#article-list").append("ul#<%= @article.id %>")
+$("#article-list").html("<%= j render 'list') %>")
+$("#modal-article").modal("hide")

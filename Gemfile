@@ -82,4 +82,5 @@ gem 'bootstrap-sass'
 gem 'rails-ujs'
 
 gem 'jquery-rails'
+gem "jquery-fileupload-rails"
 

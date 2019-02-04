@@ -1,0 +1,105 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$primary-color: #000;
+
+#logo {
+  font-size: 1.8em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  padding-top: 9px;
+  padding-bottom: 3px;
+}
+
+#logo:hover {
+color: #fff;
+text-decoration: none;
+}
+
+#info {
+  font-weight: bold;
+  font-size: 1.6em;
+  color: #2F4F4F;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 15px;
+  padding-bottom: 13px;
+}
+
+#article-titles {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #008B8B;
+  text-transform: uppercase;
+  /*text-decoration: none;*/
+}
+/* оптимизировать css код: 
+  1. убрать стили для body, section, textarea
+  2. разделить по файлам (для каждой модели)
+*/
+body {
+  padding-top: 90px;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+div.search {
+  margin-left: 30%;
+}
+
+div.img {
+  display: inline;
+}
+
+div.bottom {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  float: left;
+}
+
+p.text {
+  font-size: 1.3em;
+  margin-top: 2%;
+  text-align: justify;
+  text-indent: 1.5em;
+}
+
+p.text-sm {
+  font-size: 1.1em;
+  text-align: justify;
+}
+
+div.right {
+  position: absolute;
+  top: 1;
+  right: 0;
+  margin-right: 1em;
+}
+
+span.hi {
+  color: #fff;
+}
+
+span.right {
+  float: right;
+  margin-bottom: 1em;
+}
+
+div.left {
+  position: absolute;
+  top: 1;
+  left: 0;
+  margin-right: 1em;
+}
+
+.t-hidden {
+  word-wrap: break-word;
+  overflow: hidden;
+}

@@ -4,9 +4,9 @@ class ArticlesController < ApplicationController
 
   def search
     if params[:q].present?
-      @articles = Article.search(params[:q]).paginate(page: params[:page], per_page: 2)
+      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
     else
-      @articles = nil
+      @articles = []
     end
     respond_to do |format|
       format.html { render articles_search_path }
@@ -46,19 +46,14 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-
     respond_to do |format|
       if @article.save
         # добавить обычную проверку, что картинок нет
-        begin 
-          params[:images]['file'].each do |i|
-            @image = @article.images.create!(:file => i)
-          end
-        rescue NoMethodError
-        ensure
-          format.html { redirect_to @article }
-          format.js
-        end  
+        params[:images]['file'].each do |i|
+          @image = @article.images.create!(:file => i)
+        end
+        format.html { redirect_to root_path }
+        format.js 
       else
         format.js { render :new }
       end

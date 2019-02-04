@@ -1,9 +1,0 @@
-<h4 class="center">Результаты поиска</h4><br>
-<% if @articles.nil? || @articles.empty? %>
-  <%# без полной перезагрузки страницы div-ы c alert-ами можно выводить с помощью js %>
-  <div class="alert alert-warning hide" role="alert">
-    <h5 class="center">Статей по вашему запросу не найдено :(</h5>
-  </div>
-<% else %>
-  <%= render 'list' %>
-<% end %>
