@@ -49,10 +49,15 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.save
         # добавить обычную проверку, что картинок нет
-        params[:images]['file'].each do |i|
-          @image = @article.images.create!(:file => i)
+        if params[:images] != nil
+          params[:images]['file'].each do |i|
+            @image = @article.images.create!(:file => i)
+          end
+        else
+          @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
         end
-        format.html { redirect_to root_path }
+     
+        format.html { redirect_to article_path }
         format.js 
       else
         format.js { render :new }
