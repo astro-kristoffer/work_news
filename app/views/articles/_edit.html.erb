@@ -4,7 +4,11 @@
 </div>
 <%= render 'form' %>
 <p>
-  <%= render @article.images %>
+<% @images.each do |p| %>
+
+  <%= image_tag(p.file.url, height: '250') %>
+
+<% end %>
 </p>
 
 <%#= form_with model: [@article, @article.images.build] do |f| %>

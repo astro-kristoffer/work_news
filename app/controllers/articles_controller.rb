@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   def search
     if params[:q].present?
-      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
+      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 5)
     else
       @articles = []
     end
@@ -15,8 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    # @articles = Article.all
-    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
+    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
       format.js
@@ -38,7 +37,7 @@ class ArticlesController < ApplicationController
   
   def edit
     @article = Article.find(params[:id])
-    @image = @article.images.build
+    @images = @article.images.all
     respond_to do |format|
       format.js
     end
@@ -53,11 +52,9 @@ class ArticlesController < ApplicationController
           params[:images]['file'].each do |i|
             @image = @article.images.create!(:file => i)
           end
-        else
-          @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
         end
-     
-        format.html { redirect_to article_path }
+        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
+        format.html { redirect_to root_path }
         format.js 
       else
         format.js { render :new }
@@ -67,13 +64,17 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-    params[:images]['file'].each do |i|
+    if params[:images] != nil
+      params[:images]['file'].each do |i|
         @image = @article.images.create!(:file => i)
       end
+    end
     respond_to do |format|
       if @article.update(article_params)
+        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
         format.html { redirect_to root_path }
-        # format.js 
+        format.js
+      else 
         # format.html { render :edit }
         format.js {render :edit }
       end
@@ -83,6 +84,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
+    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js

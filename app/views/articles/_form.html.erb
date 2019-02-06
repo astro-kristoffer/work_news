@@ -20,7 +20,7 @@
     <p>
       <%= f.fields_for :images do |p| %>
        <div>
-         <%= p.label :Изображение %><br>
+         <%= p.label :file, "Изображение" %><br>
          <%= p.file_field :file, :multiple => true, name: "images[file][]" %>
        </div>
      <% end %>

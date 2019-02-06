@@ -1,0 +1,5 @@
+
+<%= form_for Image.new do |f| %>
+  <%= f.label :file, "Изображение:" %>
+  <%= f.file_field :file, multiple: true, name: "image[file]" %>
+<% end %>
