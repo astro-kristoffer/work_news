@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   def search
     if params[:q].present?
-      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 5)
+      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
     else
       @articles = []
     end
@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
+    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.html
       format.js
@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
             @image = @article.images.create!(:file => i)
           end
         end
-        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
+        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
         format.html { redirect_to root_path }
         format.js 
       else
@@ -71,7 +71,7 @@ class ArticlesController < ApplicationController
     end
     respond_to do |format|
       if @article.update(article_params)
-        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
+        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
         format.html { redirect_to root_path }
         format.js
       else 
@@ -84,7 +84,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 5)
+    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js

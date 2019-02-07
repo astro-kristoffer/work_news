@@ -1,5 +1,14 @@
+<ul class="row" id="images-list">
+  <%#= render @images %>
+</ul>
 
-<%= form_for Image.new do |f| %>
+<%= form_for :images, remote: true do |f| %>
   <%= f.label :file, "Изображение:" %>
-  <%= f.file_field :file, multiple: true, name: "image[file]" %>
+  <%= f.file_field :file, multiple: true, name: "image[file][]" %>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $('#new_image').fileupload({dataType: 'script'});
+  });
+</script>
