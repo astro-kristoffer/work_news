@@ -4,16 +4,20 @@
 </div>
 <%= render 'form' %>
 <p>
-<% @images.each do |p| %>
-
-  <%= image_tag(p.file.url, height: '250') %>
-
+<% @images.each do |image| %>
+  <ul id="<%= image.id %>">
+    <%= image_tag(image.file.url, height: '250') %>
+    <%= link_to 'Удалить', [image.article, image], remote: true, class: "btn btn-light",
+            method: :delete,
+            data: { confirm: 'Вы уверены?' } %>
+  </ul>
 <% end %>
 </p>
+<%= link_to  "Посмотреть статью", article_path(@article), class: "btn btn-secondary" %>
 
 <%#= form_with model: [@article, @article.images.build] do |f| %>
   <%#= f.file_field :file%><br>
-  <%# либо сохранять вместе со статьей, либо сохранять сразу при выборе фалйа %>
+  <%# либо сохранять вместе со статьей, либо сохранять сразу при выборе файла %>
   <%# кнопка 'Прикрепить изображение' не должна требоваться %>
   <%#= f.submit 'Прикрепить изображение', class: "btn btn-secondary" %>
 <%# end %>

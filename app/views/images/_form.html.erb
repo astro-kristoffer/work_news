@@ -1,10 +1,10 @@
-<ul class="row" id="images-list">
+<div id="images-list">
   <%#= render @images %>
-</ul>
+</div>
 
 <%= form_for :images, remote: true do |f| %>
   <%= f.label :file, "Изображение:" %>
-  <%= f.file_field :file, multiple: true, name: "image[file][]" %>
+  <%= f.file_field :file, multiple: true, name: "image[file][]", id: 'new_image' %>
 <% end %>
 
 <script>

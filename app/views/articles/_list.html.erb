@@ -27,5 +27,4 @@
   </div>
 </ul>
 <% end %>
-
-<%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination-sm" %>
+<%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination-sm", :params => {:action => 'index' } %>
