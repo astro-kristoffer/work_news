@@ -21,19 +21,18 @@
       <%= f.label :Текст, class: "control-label" %><br>
       <%= f.text_area :text, size: "50x20", placeholder: "Введите текст статьи", class: "form-control" %><br>
       <%# remote: true, поискать, как сохранять файлы %>
-      <%= f.fields_for :images do |p| %>
-      <div>
-        <%= p.label :file, "Изображение" %><br>
-        <%= p.file_field :file, :multiple => true, name: "images[file][]", id: 'new_image' %>
-      </div>
-      <div id="images-list">
-        <%#= render @images %>
-      </div>
-      <% end %>
-      <%= f.submit "Сохранить статью", class: "btn btn-secondary" %>
+      <%# if @images.nil? %>
+        <%= f.fields_for :images, @article.images.build do |p| %>
+        <div>
+          <%= p.file_field :file, :multiple => true, name: "images[file][]", id: 'new_image' %>
+        </div>
+        <% end %>
+      <%# end %>
+      <%= f.submit "Сохранить статью", class: "btn btn-secondary", id: "up_btn" %>
 
       <%# возможно уместна кнопка перехода к просмотру из формы редактирования %>
     </div>
   <% end %>
 </div>
-
+<div id="images-list">
+</div>

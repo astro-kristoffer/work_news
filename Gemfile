@@ -84,4 +84,3 @@ gem 'rails-ujs'
 gem 'jquery-rails'
 gem "jquery-fileupload-rails"
 gem 'remotipart', '~> 1.2'
-

@@ -34,10 +34,7 @@ text-decoration: none;
   text-transform: uppercase;
   /*text-decoration: none;*/
 }
-/* оптимизировать css код: 
-  1. убрать стили для body, section, textarea
-  2. разделить по файлам (для каждой модели)
-*/
+
 body {
   padding-top: 90px;
 }
