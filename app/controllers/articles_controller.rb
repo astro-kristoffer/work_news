@@ -8,7 +8,6 @@ class ArticlesController < ApplicationController
       @articles = []
     end
     respond_to do |format|
-      format.html { render articles_search_path }
       format.js
     end
   end
@@ -46,10 +45,9 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     respond_to do |format|
       if @article.save
-        # добавить обычную проверку, что картинок нет
         if params[:images] != nil
-          params[:images]['file'].each do |i|
-            @image = @article.images.create!(:file => i)
+          params[:images]['file'].each do |file|
+            @image = @article.images.create!(:file => file)
           end
         end
         @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
@@ -64,8 +62,8 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if params[:images] != nil
-      params[:images]['file'].each do |i|
-        @image = @article.images.create!(:file => i)
+      params[:images]['file'].each do |file|
+        @image = @article.images.create!(:file => file)
       end
     end
     respond_to do |format|

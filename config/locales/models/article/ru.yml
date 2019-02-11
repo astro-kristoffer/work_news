@@ -1,0 +1,8 @@
+ru:
+  mongoid:
+    models:
+      article: Статья
+    attributes:
+      article:
+        title: "Заголовок"
+        text: "Текст"

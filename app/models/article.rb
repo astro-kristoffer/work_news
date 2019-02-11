@@ -13,13 +13,6 @@ class Article
     as_json(only: [:title, :text])
   end
 
-  # settings do
-    # mappings dynamic: false do
-      # indexes :title, analyzer: :russian
-      # indexes :text, analyzer: :russian
-    # end
-  # end
- 
   validates :title, presence: true, length: { in: 5..250 }
   validates :text, presence: true, length: { in: 5..2000 }
 end

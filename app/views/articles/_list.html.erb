@@ -1,4 +1,3 @@
-<%# ограничение количества статей на странице, желательно без полной перезагрузки страницы %> 
 <% @articles.each do |article| %>
 <ul id="<%= article.id %>">
   <div class="card-deck">
@@ -18,7 +17,6 @@
     <div class="btn-group-vertical">   
       <% if admin_signed_in? %>
         <%= link_to 'Редактировать', edit_article_path(article),{ :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#new-article', class: "btn btn-light" } %>
-        <%#!! remote: true #%>
         <%= link_to 'Удалить', article_path(article), remote: true, class: "btn btn-light",
             method: :delete,
             data: { confirm: 'Вы уверены?' } %>

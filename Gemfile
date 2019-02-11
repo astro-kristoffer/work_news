@@ -82,5 +82,7 @@ gem 'bootstrap-sass'
 gem 'rails-ujs'
 
 gem 'jquery-rails'
-gem "jquery-fileupload-rails"
 gem 'remotipart', '~> 1.2'
+
+gem 'rails-i18n', '~> 5.1'
+gem 'russian', '~> 0.6.0'

@@ -4,11 +4,11 @@
 <% @images.each do |p| %>
   <%= image_tag(p.file.url, height: '250') %>
 <% end %>
+
 <p class="text">
   <%= @article.text %>
 </p>
 
 <div class="bottom">
   <%= link_to 'Назад', root_path, class: "btn btn-light" %>
-  <%# возможно редактирование имеет смысл сделать интерактивным и оставить только на списке статей, просмотр оставить для просмотра %>
 </div>
