@@ -2,11 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show, :search]
 
   def search
-    if params[:q].empty?
-      @articles = []
-    else
-      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
-    end
+    params[:q].nil? ? [] : @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.js
     end

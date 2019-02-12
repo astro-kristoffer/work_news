@@ -1,2 +1,3 @@
-$.get("/articles.js?page=1");
+var page_num = $('#params_page').val()
+$.get("/articles.js", {page: page_num});
 $("#modal-article").modal("hide")

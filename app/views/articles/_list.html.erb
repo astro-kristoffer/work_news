@@ -20,9 +20,11 @@
         <%= link_to 'Удалить', article_path(article), remote: true, class: "btn btn-light",
             method: :delete,
             data: { confirm: 'Вы уверены?' } %>
+
       <% end %>
     </div>
   </div>
 </ul>
 <% end %>
+<%= hidden_field_tag(:page, params[:page], id: 'params_page') %>
 <%= will_paginate @articles, renderer: BootstrapPagination::Rails, class: "pagination-sm", :params => {:action => 'index' } %>
