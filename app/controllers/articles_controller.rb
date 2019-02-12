@@ -1,11 +1,11 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_admin!, except: [:index, :show, :search] 
+  before_action :authenticate_admin!, except: [:index, :show, :search]
 
   def search
-    if params[:q].present?
-      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
-    else
+    if params[:q].empty?
       @articles = []
+    else
+      @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
     end
     respond_to do |format|
       format.js
@@ -45,12 +45,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     respond_to do |format|
       if @article.save
-        if params[:images] != nil
-          params[:images]['file'].each do |file|
-            @image = @article.images.create!(:file => file)
-          end
-        end
-        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
+        (params[:images].nil? ? [] : params[:images]['file'])
+          .each { |file| @article.images.create!(:file => file) }  
         format.html { redirect_to root_path }
         format.js 
       else
@@ -61,14 +57,10 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-    if params[:images] != nil
-      params[:images]['file'].each do |file|
-        @image = @article.images.create!(:file => file)
-      end
-    end
+    (params[:images].nil? ? [] : params[:images]['file'])
+      .each { |file| @article.images.create!(:file => file) }
     respond_to do |format|
       if @article.update(article_params)
-        @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
         format.html { redirect_to root_path }
         format.js
       else 
@@ -80,7 +72,6 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2) 
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js

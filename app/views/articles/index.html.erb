@@ -4,7 +4,6 @@
     <span class="navbar-brand", id="info">Новости астрономии</span>
   </div>
   <div class="right">  
-    <%#!! remote: true %>
     <div id="search-article">
       <%= form_for :q, url: articles_search_path, remote: true, method: 'get' do |f| %>
         <%= text_field_tag(:q, params[:q], size: 30, placeholder:"Найти статью") %>
@@ -33,4 +32,8 @@
 <div id="article-list">
   <%= render 'list' %>
 </div>
+<div class="btn-hidden">
+  <%= link_to 'Назад', root_path, class: "btn btn-light" %>
+</div>
+
 
