@@ -1,15 +1,11 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show, :search]
-
-  def search
-    params[:q].nil? ? [] : @articles = Article.search(params[:q]).records.records.paginate(page: params[:page], per_page: 2)
-    respond_to do |format|
-      format.js
-    end
-  end
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.order(_id: -1 ).paginate(page: params[:page], per_page: 2)
+    @articles = Article.search(params[:q]).records.records if params.key?(:q)
+    @articles ||= Article.order(_id: -1 )
+    @articles = @articles.paginate(page: params[:page], per_page: 2)
     respond_to do |format|
       format.html
       format.js
@@ -17,7 +13,6 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @article = Article.find(params[:id])
     @images = @article.images.all
   end
 
@@ -30,7 +25,6 @@ class ArticlesController < ApplicationController
   end
   
   def edit
-    @article = Article.find(params[:id])
     @images = @article.images.all
     respond_to do |format|
       format.js
@@ -52,7 +46,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
     (params[:images].nil? ? [] : params[:images]['file'])
       .each { |file| @article.images.create!(:file => file) }
     respond_to do |format|
@@ -66,7 +59,6 @@ class ArticlesController < ApplicationController
   end
   
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     respond_to do |format|
       format.html { redirect_to root_path }
@@ -74,8 +66,18 @@ class ArticlesController < ApplicationController
     end
   end
 
-  private  
-    def article_params
-      params.require(:article).permit(:title, :text)
+private
+  def find_article
+    @article = Article.find(params[:id])
+    if @article.nil?
+      respond_to do |format|
+        format.html { render :file => "#{Rails.root}/public/404"}
+        format.js {render 'errors'}
+      end
     end
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :text)
+  end
 end

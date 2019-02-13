@@ -1,2 +1,10 @@
-$('#article-list').html("<%= j render 'list' %>");
-$('.pagination a').attr('data-remote', 'true');
+<% if @articles.empty? %>
+  $('#article-list').hide();
+  $('.hide').removeClass('hide');
+  $('.alert').show();
+<% else %>
+  $('.alert').hide();
+  $('#article-list').show().html("<%= j render 'list' %>");
+  $('.pagination a').attr('data-remote', 'true');
+<% end %>
+$('.btn-hidden').removeClass('btn-hidden');

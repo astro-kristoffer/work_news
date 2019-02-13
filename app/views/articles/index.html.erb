@@ -5,7 +5,7 @@
   </div>
   <div class="right">  
     <div id="search-article">
-      <%= form_for :q, url: articles_search_path, remote: true, method: 'get' do |f| %>
+      <%= form_for :q, url: articles_path, remote: true, method: 'get' do |f| %>
         <%= text_field_tag(:q, params[:q], size: 30, placeholder:"Найти статью") %>
         <%= submit_tag("Поиск", class: "btn btn-secondary") %>
       <% end %>
